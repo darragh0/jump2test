@@ -1,0 +1,58 @@
+{
+  "name": "jump2test",
+  "displayName": "Jump to Test",
+  "icon": "images/logo.png",
+  "description": "Quickly find and jump to test files for a corresponding source file",
+  "version": "1.0.0",
+  "publisher": "darragh0",
+  "license": "MIT",
+  "homepage": "https://github.com/darragh0/jump2test/blob/main/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darragh0/jump2test.git"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "activationEvents": [
+    "onCommand:jump2test.findTests"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "jump2test.findTests",
+        "title": "Jump to Test"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "jump2test.findTests",
+        "key": "ctrl+t ctrl+t",
+        "mac": "cmd+t cmd+t",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/prompts": "^2.4.9",
+    "@types/vscode": "^1.74.0",
+    "boxen": "^8.0.1",
+    "chalk": "^5.5.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-unicorn": "^60.0.0",
+    "ora": "^8.2.0",
+    "prompts": "^2.4.2",
+    "typescript": "^5.9.2",
+    "vsce": "^1.103.1"
+  }
+}
