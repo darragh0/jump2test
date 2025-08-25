@@ -1,20 +1,12 @@
-import fs from "fs";
-import { EmberErr } from "../finders/ember/const";
-import { getEmberSearchTerm } from "../finders/ember/main";
-import { CommonErr } from "./const";
-import { Result } from "./type";
+import { ErrMsg } from "./const.js";
+import { ErrVariant, OkVariant } from "./types.js";
 
-export function getTestQuery(
-  filePath: string
-): Result<string, CommonErr | EmberErr> {
-  if (!filePath || filePath.trim() === "")
-    return { err: CommonErr.INVALID_FILE };
-
-  // should not happen
-  if (!fs.existsSync(filePath)) return { err: CommonErr.NOT_IN_FILE };
-
-  const query = getEmberSearchTerm(filePath);
-  if (query.err === undefined && query.data !== undefined) return query;
-
-  return { err: query.err };
+function Ok<T>(value: T): OkVariant<T> {
+  return { ok: true, value };
 }
+
+function Err(error: ErrMsg | string): ErrVariant {
+  return { ok: false, error };
+}
+
+export { Err, Ok };

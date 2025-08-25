@@ -1,13 +1,18 @@
 import * as vscode from "vscode";
 
-export const logger = vscode.window.createOutputChannel("Jump to Test", {
+/** Shared output channel for diagnostic & informational logs */
+const logger = vscode.window.createOutputChannel("Jump to Test", {
   log: true,
 });
 
-export function debug(message: string, ...args: unknown[]): void {
+/** Write a debug message to the output channel */
+function debug(message: string, ...args: readonly unknown[]): void {
   logger.appendLine(`[DEBUG] ${message} ${args.join(" ")}`);
 }
 
-export function log(message: string, ...args: unknown[]): void {
+/** Write a general log message to the output channel */
+function log(message: string, ...args: readonly unknown[]): void {
   logger.appendLine(`[LOG] ${message} ${args.join(" ")}`);
 }
+
+export { debug, log };

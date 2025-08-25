@@ -1,12 +1,8 @@
-import path from "path";
+const EMBER_FILES: readonly string[] = ["app/router.js", "app.js", "config/environment.js"];
 
-export const EMBER_INDICATORS = [
-  "router.js",
-  "app.js",
-  path.join("config", "environment.js"),
-];
+const EMBER_DEPS: readonly string[] = ["ember-source", "ember-cli"];
+const EMBER_DEV_DEPS: readonly string[] = ["ember-source", "ember-cli"];
 
-export enum EmberErr {
-  NOT_JS = "Not a .ts or .js file >:(",
-  ALREADY_TEST = "File seems to be a test file :/",
-}
+const EMBER_ALLOWED_EXTS: readonly string[] = [".js", ".ts"];
+
+export { EMBER_ALLOWED_EXTS, EMBER_DEPS, EMBER_DEV_DEPS, EMBER_FILES };

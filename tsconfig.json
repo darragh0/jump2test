@@ -12,5 +12,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "exclude": ["node_modules", ".vscode-test"],
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "src/extension.ts"]
 }

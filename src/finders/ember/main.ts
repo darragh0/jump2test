@@ -1,57 +1,41 @@
-import fs from "fs";
 import path from "path";
-import { CommonErr } from "../../common/const";
-import { Result } from "../../common/type";
-import { EMBER_INDICATORS, EmberErr } from "./const";
+import { ErrMsg } from "../../common/const.js";
+import { Err, Ok } from "../../common/main.js";
+import { Result } from "../../common/types.js";
+import { showInfo } from "../../ui/user-msg.js";
+import { EMBER_ALLOWED_EXTS } from "./const.js";
 
-/**
- * Strips the `app/` prefix from an Ember.js file path.
- * Prefers a verified Ember app root. If not found, strips
- * the deepest `app/` prefix.
- *
- * @param filePath Path to source file
- */
-function stripAppPath(filePath: string): Result<string, CommonErr | EmberErr> {
-  const norm = path.resolve(filePath);
-  const parts = norm.split(path.sep);
+function getEmberGlobSuff(query: string): string {
+  return `${query}-test{${EMBER_ALLOWED_EXTS.join(",")}}`;
+}
 
-  let deepestAppIdx: number | null = null;
-  for (let i = 0; i < parts.length; i++) {
-    if (parts[i] === "app") {
-      deepestAppIdx = i;
-      const projRoot = parts.slice(0, i).join(path.sep);
-      const hasIndicator = EMBER_INDICATORS.some((indicator) =>
-        fs.existsSync(path.join(projRoot, indicator))
-      );
+/** Build the Ember test search term for a source file */
+function getEmberGlob(fPath: string, rootDir: string): Result<string> {
+  const endsWithTest = fPath.endsWith("-test.js") || fPath.endsWith("-test.ts");
 
-      if (hasIndicator) return { data: parts.slice(i + 1).join(path.sep) };
-    }
+  const rel = path.relative(rootDir, fPath);
+  const relParts = rel.split(path.sep);
+  const appIdx = relParts.findIndex((segment) => segment === "app");
+
+  if (appIdx === -1) {
+    const testIdx = relParts.findIndex((segment) => segment === "tests");
+    if (testIdx === -1 && endsWithTest) return Err(ErrMsg.MAYBE_ALREADY_IN_TEST);
+    else if (endsWithTest) return Err(ErrMsg.ALREADY_IN_TEST);
+
+    return Err(ErrMsg.MISSING_EMBER_APP);
   }
 
-  if (deepestAppIdx !== null)
-    return { data: parts.slice(deepestAppIdx + 1).join(path.sep) };
+  if (endsWithTest) showInfo(ErrMsg.MAYBE_TEST_IN_APP_DIR);
 
-  if (filePath.endsWith("-test.js") || filePath.endsWith("-test.ts"))
-    return { err: EmberErr.ALREADY_TEST };
+  // hmm im erroneously getting this: "**/tests/{unit,integration,acceptance}/services/notifications-service.js-test{.js,
+  // fix this pls copilot:
 
-  return { err: CommonErr.NOT_SUPPORTED };
+  const query = path.join(relParts.slice(appIdx + 1, -1).join(path.sep), path.parse(fPath).name);
+  return Ok(`**/tests/{unit,integration,acceptance}/${getEmberGlobSuff(query)}`);
 }
 
-/**
- * Returns the search term for finding test files.
- *
- * @param filePath Path to source file.
- * @returns Search term for finding the test file.
- */
-export function getEmberSearchTerm(
-  filePath: string
-): Result<string, CommonErr | EmberErr> {
-  const stripped = stripAppPath(filePath);
-  if (stripped.data === undefined) return { err: stripped.err };
-
-  const parts = path.parse(stripped.data);
-  if (![".js", ".ts"].includes(parts.ext)) return { err: EmberErr.NOT_JS };
-
-  const query = path.join(parts.dir, `${parts.name}-test`);
-  return { data: query };
+function getEmberFallbackGlob(fPath: string): string {
+  return `**/${getEmberGlobSuff(path.parse(fPath).name)}`;
 }
+
+export { getEmberFallbackGlob, getEmberGlob };

@@ -22,6 +22,21 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Jump to Test",
+      "properties": {
+        "jump2test.autoOpen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically open test file when only one match is found"
+        },
+        "jump2test.allowFallback": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow fallback search if no test files are found"
+        }
+      }
+    },
     "commands": [
       {
         "command": "jump2test.findTests",
@@ -51,6 +66,7 @@
     "eslint": "^9.33.0",
     "eslint-plugin-unicorn": "^60.0.0",
     "ora": "^8.2.0",
+    "prettier": "^3.6.2",
     "prompts": "^2.4.2",
     "typescript": "^5.9.2",
     "vsce": "^1.103.1"
