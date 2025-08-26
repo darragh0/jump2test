@@ -1,9 +1,13 @@
-<div align="center" style="margin: 1rem 0 1.5rem 0">
-  <img style="margin-bottom: 1.5rem" src="./img/logo.png" width="150" />
+<br />
+<br />
+<div align="center">
+  <div>
+    <img src="https://raw.githubusercontent.com/darragh0/jump2test/refs/heads/main/assets/logo.png" width="150" />
+  </div>
 
   <p><i>Quickly jump to test files in <a href="https://code.visualstudio.com">VSCode</a></i></p>
 
-   <div style="margin-bottom: .5rem">
+   <div>
      <a href="https://github.com/darragh0/jump2test/stargazers">
        <img src="https://img.shields.io/github/stars/darragh0/jump2test?colorA=363a4f&colorB=b7bdf8&style=for-the-badge">
      </a>
@@ -23,6 +27,7 @@
      </a>
   </div>
 </div>
+<br />
 
 ## Supported Frameworks
 
@@ -32,12 +37,11 @@
 ## Usage
 
 - Hold `Cmd` (Mac) or `Ctrl` (Win/Linux) and double tap `T` to find tests for the current file
-
-❗ Change the keyboard shortcut via `jump2test.findTests` in `Preferences: Open Keyboard Shortcuts`
+- Change the keyboard shortcut via `jump2test.findTests` in `Preferences: Open Keyboard Shortcuts`
 
 ## Configuration
 
-The following settings are provided:
+The following settings are provided. You can access them [here](vscode://settings/jump2test.)
 
 ```json
 {
@@ -54,20 +58,19 @@ The following settings are provided:
 
 ## Development
 
-❗ `npm` or `pnpm` required
+1. Ensure you have `npm` or `pnpm` installed
 
-1. To build the extension, run:
+2. To build the extension, run:
 
    ```bash
    pnpm install
    pnpm run compile
    ```
 
-2. Launch for testing
+3. Launch for testing
    - Press `F5` to start an Extension Development Host
-     <br /><br />
 
-3. Optionally install locally without publishing
+4. Optionally install locally without publishing
 
    ```bash
    vsce package
@@ -75,3 +78,5 @@ The following settings are provided:
    code --install-extension ./jump2test-*.vsix   # VS Code
    cursor --install-extension ./jump2test-*.vsix # Cursor
    ```
+
+[Seo and web icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/seo-and-web)

@@ -1,11 +1,13 @@
 import { debug } from "../common/logger";
 import ember from "./impl/ember";
 import react from "./impl/react";
+import ruby from "./impl/ruby";
 import { Framework } from "./interface";
 
 const frameworks = new Map<string, Framework>([
   [react.name, react],
   [ember.name, ember],
+  [ruby.name, ruby],
 ]);
 let init = false;
 

@@ -4,7 +4,6 @@
   "icon": "assets/logo.png",
   "description": "Quickly find and jump to test files for a corresponding source file",
   "version": "1.0.0",
-  "type": "module",
   "publisher": "darragh0",
   "license": "MIT",
   "homepage": "https://github.com/darragh0/jump2test/blob/main/README.md",
@@ -15,7 +14,9 @@
   "engines": {
     "vscode": "^1.75.0"
   },
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:jump2test.findTests"
+  ],
   "categories": [
     "Other"
   ],
@@ -58,11 +59,11 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
-    "compile": "npm run check-types && node esbuild.js",
+    "compile": "npm run check-types && node esbuild.mjs",
     "watch": "npm-run-all -p watch:*",
-    "watch:esbuild": "node esbuild.js --watch",
+    "watch:esbuild": "node esbuild.mjs --watch",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "package": "npm run check-types && node esbuild.js --production",
+    "package": "npm run check-types && node esbuild.mjs --production",
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
