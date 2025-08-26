@@ -1,7 +1,7 @@
 {
   "name": "jump2test",
   "displayName": "Jump to Test",
-  "icon": "img/logo.png",
+  "icon": "assets/logo.png",
   "description": "Quickly find and jump to test files for a corresponding source file",
   "version": "1.0.0",
   "type": "module",
