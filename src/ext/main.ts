@@ -34,13 +34,14 @@ async function main(): Promise<void> {
   }
 
   const fw = detectFramework(rootDir);
-  debug(`Detected framework: "${fw}"`);
   if (!fw) {
     showErr(ErrMsg.UNSUPPORTED_FRAMEWORK);
     return;
   }
 
-  const checkExt = await checkValidExt(curPath, fw);
+  debug(`Detected framework: "${fw.name}"`);
+
+  const checkExt = checkValidExt(curPath, fw);
   if (!checkExt.ok) {
     showErr(checkExt.error);
     return;
@@ -62,7 +63,7 @@ async function main(): Promise<void> {
   const shouldOpen = !isFallback && files.length === 1;
 
   if (shouldOpen && conf.autoOpen) {
-    await openFile(files[0].fsPath);
+    await openFile(files[0].fsPath, conf.keepSourceOpen);
     return;
   } else if (!shouldOpen && !conf.autoOpen) {
     debug(`Info: config.autoOpen is disabled; proceeding to selection`);
@@ -79,7 +80,7 @@ async function main(): Promise<void> {
   const title = isFallback ? QuickPickTitle.PossibleMatches : QuickPickTitle.MatchesFound;
   const selected = await showFilesQuickPick(files, { title });
 
-  if (selected) await openFile(selected.fsPath);
+  if (selected) await openFile(selected.fsPath, conf.keepSourceOpen);
 }
 
 export { main };

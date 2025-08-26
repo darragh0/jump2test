@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { debug } from "../common/logger";
+import { debug, err } from "../common/logger";
 
 function showErr(msg: string): void {
-  debug(`Error: "${msg}"`);
+  err(msg);
   void vscode.window.showErrorMessage(msg);
 }
 

@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { debug } from "./common/logger.js";
 import { main } from "./ext/main.js";
 
-export function activate(context: vscode.ExtensionContext): void {
+export async function activate(context: vscode.ExtensionContext): Promise<void> {
   debug("✅ jump2test activated");
   const disposable = vscode.commands.registerCommand("jump2test.findTests", main);
   context.subscriptions.push(disposable);

@@ -15,4 +15,8 @@ function log(message: string, ...args: readonly unknown[]): void {
   logger.appendLine(`[LOG] ${message} ${args.join(" ")}`);
 }
 
-export { debug, log };
+function err(message: string, ...args: readonly unknown[]): void {
+  logger.appendLine(`[ERROR] ${message} ${args.join(" ")}`);
+}
+
+export { debug, err, log };

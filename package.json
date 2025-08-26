@@ -34,6 +34,11 @@
           "type": "boolean",
           "default": true,
           "description": "Allow fallback search if no test files are found"
+        },
+        "jump2test.keepSourceOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Keep source file open (prevent preview tab replacement) when opening test file"
         }
       }
     },

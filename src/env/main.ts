@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { Framework, FwIndicators, MAX_ROOT_DIR_ITERATIONS } from "./const.js";
+import { Framework } from "../fw/interface.js";
+import { getAllFrameworks } from "../fw/registry.js";
+import { MAX_ROOT_DIR_ITERATIONS } from "./const.js";
 import { PackageJson } from "./types.js";
 
 function readPackageJson(rootDir: string): PackageJson | null {
@@ -35,10 +37,8 @@ function findNearestRoot(startPath: string): string | null {
   return null;
 }
 
-/** Framework detection cache */
 const fwCache = new Map<string, Framework | null>();
 
-/** Detect framework by inspecting nearest `package.json` & indicators (memoized) */
 function detectFramework(rootDir: string): Framework | null {
   const cached = fwCache.get(rootDir);
   if (cached) return cached;
@@ -47,11 +47,10 @@ function detectFramework(rootDir: string): Framework | null {
   const deps = pkg?.dependencies ?? {};
   const devDeps = pkg?.devDependencies ?? {};
 
-  for (const [fwName, indicators] of Object.entries(FwIndicators)) {
-    const fw = fwName as Framework;
-    const hasFiles = indicators.files.some((file) => fs.existsSync(path.join(rootDir, file)));
+  for (const fw of getAllFrameworks()) {
+    const hasFiles = fw.files.some((file: string) => fs.existsSync(path.join(rootDir, file)));
 
-    if (hasAny(deps, indicators.deps) || hasAny(devDeps, indicators.devDeps) || hasFiles) {
+    if (hasAny(deps, fw.deps) || hasAny(devDeps, fw.devDeps) || hasFiles) {
       fwCache.set(rootDir, fw);
       return fw;
     }
