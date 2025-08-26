@@ -1,7 +1,7 @@
 import path from "path";
-import { Ok } from "../../common/main.js";
-import { Result } from "../../common/types.js";
-import { Framework } from "../interface.js";
+import { Ok } from "../../common/main";
+import { Result } from "../../common/types";
+import { Framework } from "../interface";
 
 const REACT_ALLOWED_EXTS = [".js", ".ts", ".jsx", ".tsx"];
 const EXTS = REACT_ALLOWED_EXTS.join(",");

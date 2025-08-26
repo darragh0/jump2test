@@ -1,5 +1,5 @@
-import { ErrMsg } from "./const.js";
-import { ErrVariant, OkVariant } from "./types.js";
+import { ErrMsg } from "./const";
+import { ErrVariant, OkVariant } from "./types";
 
 function Ok<T>(value: T): OkVariant<T> {
   return { ok: true, value };

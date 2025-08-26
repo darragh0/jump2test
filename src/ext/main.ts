@@ -1,14 +1,14 @@
 import fs from "fs";
 import * as vscode from "vscode";
 
-import { ErrMsg, InfoMsg } from "../common/const.js";
-import { debug } from "../common/logger.js";
-import { detectFramework, findNearestRoot } from "../env/main.js";
-import { QuickPickTitle } from "../ui/const.js";
-import { openFile, showFilesQuickPick } from "../ui/main.js";
-import { showErr, showInfo } from "../ui/user-msg.js";
-import { getUserConfig } from "./config/main.js";
-import { checkValidExt, findFiles, getTestQuery } from "./utils.js";
+import { ErrMsg, InfoMsg } from "../common/const";
+import { debug } from "../common/logger";
+import { detectFramework, findNearestRoot } from "../env/main";
+import { QuickPickTitle } from "../ui/const";
+import { openFile, showFilesQuickPick } from "../ui/main";
+import { showErr, showInfo } from "../ui/user-msg";
+import { getUserConfig } from "./config/main";
+import { checkValidExt, findFiles, getTestQuery } from "./utils";
 
 /** Entrypoint: find and open related test file(s) */
 async function main(): Promise<void> {

@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import { Framework } from "../fw/interface.js";
-import { getAllFrameworks } from "../fw/registry.js";
-import { MAX_ROOT_DIR_ITERATIONS } from "./const.js";
-import { PackageJson } from "./types.js";
+import { Framework } from "../fw/interface";
+import { getAllFrameworks } from "../fw/registry";
+import { MAX_ROOT_DIR_ITERATIONS } from "./const";
+import { PackageJson } from "./types";
 
 function readPackageJson(rootDir: string): PackageJson | null {
   try {

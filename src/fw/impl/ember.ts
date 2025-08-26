@@ -1,9 +1,9 @@
 import path from "path";
-import { ErrMsg } from "../../common/const.js";
-import { Err, Ok } from "../../common/main.js";
-import { Result } from "../../common/types.js";
-import { showInfo } from "../../ui/user-msg.js";
-import { Framework } from "../interface.js";
+import { ErrMsg } from "../../common/const";
+import { Err, Ok } from "../../common/main";
+import { Result } from "../../common/types";
+import { showInfo } from "../../ui/user-msg";
+import { Framework } from "../interface";
 
 const EMBER_ALLOWED_EXTS = [".js", ".ts"];
 

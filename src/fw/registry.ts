@@ -1,7 +1,7 @@
-import { debug } from "../common/logger.js";
-import ember from "./impl/ember.js";
-import react from "./impl/react.js";
-import { Framework } from "./interface.js";
+import { debug } from "../common/logger";
+import ember from "./impl/ember";
+import react from "./impl/react";
+import { Framework } from "./interface";
 
 const frameworks = new Map<string, Framework>([
   [react.name, react],

@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { Config } from "./types.js";
+import { Config } from "./types";
 
 function getUserConfig(): Config {
   return {

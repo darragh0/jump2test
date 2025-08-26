@@ -5,7 +5,6 @@ export default [
   {
     rules: {
       "unicorn/better-regex": "warn",
-      "arrow-body-style": ["error", "as-needed"],
     },
   },
 ];

@@ -1,4 +1,6 @@
-export enum QuickPickTitle {
+enum QuickPickTitle {
   MatchesFound = "✅ Matches found",
   PossibleMatches = "⚠️ Possible matches (may be unrelated)",
 }
+
+export { QuickPickTitle };

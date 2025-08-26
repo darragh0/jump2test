@@ -1,11 +1,11 @@
 import * as path from "path";
 import * as vscode from "vscode";
-import { ErrMsg } from "../common/const.js";
-import { debug } from "../common/logger.js";
-import { Err, Ok } from "../common/main.js";
-import { Result } from "../common/types.js";
-import { Framework } from "../fw/interface.js";
-import { ExcludePatterns } from "./types.js";
+import { ErrMsg } from "../common/const";
+import { debug } from "../common/logger";
+import { Err, Ok } from "../common/main";
+import { Result } from "../common/types";
+import { Framework } from "../fw/interface";
+import { ExcludePatterns } from "./types";
 
 async function getExcludeGlob(): Promise<vscode.GlobPattern> {
   const globalExclude = vscode.workspace.getConfiguration("files.exclude") as ExcludePatterns;

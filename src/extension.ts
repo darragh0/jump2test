@@ -1,13 +1,15 @@
 import * as vscode from "vscode";
-import { debug } from "./common/logger.js";
-import { main } from "./ext/main.js";
+import { debug } from "./common/logger";
+import { main } from "./ext/main";
 
-export async function activate(context: vscode.ExtensionContext): Promise<void> {
+async function activate(context: vscode.ExtensionContext): Promise<void> {
   debug("✅ jump2test activated");
   const disposable = vscode.commands.registerCommand("jump2test.findTests", main);
   context.subscriptions.push(disposable);
 }
 
-export function deactivate(): void {
+function deactivate(): void {
   debug("✅ jump2test deactivated");
 }
+
+export { activate, deactivate };

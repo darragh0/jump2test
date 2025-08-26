@@ -1,4 +1,4 @@
-import { Result } from "../common/types.js";
+import { Result } from "../common/types";
 
 /** Framework plugin interface for test file detection */
 interface Framework {

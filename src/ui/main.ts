@@ -1,11 +1,11 @@
 import * as vscode from "vscode";
-import { QuickPickFileItem, QuickPickOptions } from "./types.js";
+import { QuickPickFileItem, QuickPickOptions } from "./types";
 
 async function openFile(path: string, keepSourceOpen?: boolean): Promise<void> {
   if (keepSourceOpen && vscode.window.activeTextEditor) {
     await vscode.commands.executeCommand("workbench.action.keepEditor");
   }
-  
+
   const doc = await vscode.workspace.openTextDocument(path);
   await vscode.window.showTextDocument(doc);
 }
