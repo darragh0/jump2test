@@ -7,11 +7,13 @@ const CONFIG_DEFAULTS: Config = {
   allowFallback: true,
   keepSourceOpen: false,
   enabledStacks: new Set(StackIdArr),
+  jumpToSourceBeta: false,
 };
 
 function getConfigVal(key: "autoOpen"): boolean;
 function getConfigVal(key: "allowFallback"): boolean;
 function getConfigVal(key: "keepSourceOpen"): boolean;
+function getConfigVal(key: "jumpToSourceBeta"): boolean;
 function getConfigVal(key: "enabledStacks"): StackSet;
 
 function getConfigVal(key: keyof Config): Config[keyof Config] {

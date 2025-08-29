@@ -7,6 +7,7 @@ type Config = {
   allowFallback: boolean;
   keepSourceOpen: boolean;
   enabledStacks: StackSet;
+  jumpToSourceBeta: boolean;
 };
 
 export { Config, StackSet };

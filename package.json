@@ -54,6 +54,11 @@
             "ember",
             "ruby"
           ]
+        },
+        "jump2test.jumpToSourceBeta": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable jumping from test files to source files (Beta)"
         }
       }
     },
