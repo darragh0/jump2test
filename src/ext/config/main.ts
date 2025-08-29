@@ -17,7 +17,7 @@ function getConfigVal(key: "jumpToSourceBeta"): boolean;
 function getConfigVal(key: "enabledStacks"): StackSet;
 
 function getConfigVal(key: keyof Config): Config[keyof Config] {
-  const val = vscode.workspace.getConfiguration("jump2test").get(key, CONFIG_DEFAULTS[key]);
+  const val = vscode.workspace.getConfiguration("hoppy").get(key, CONFIG_DEFAULTS[key]);
 
   if (Array.isArray(val)) {
     return new Set(val) as Config[keyof Config];

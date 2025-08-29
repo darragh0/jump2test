@@ -11,9 +11,9 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-if (!process.cwd().endsWith("jump2test")) {
+if (!process.cwd().endsWith("hoppy")) {
   console.error(
-    "\x1b[91merror:\x1b[0m this script must be run from the root of the project (\x1b[93mjump2test\x1b[0m)"
+    "\x1b[91merror:\x1b[0m this script must be run from the root of the project (\x1b[93mhoppy\x1b[0m)"
   );
   process.exit(1);
 }

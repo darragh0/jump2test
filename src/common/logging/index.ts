@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 
 /** Shared output channel for diagnostic & informational logs */
-const logger = vscode.window.createOutputChannel("Jump to Test", { log: true });
+const logger = vscode.window.createOutputChannel("Hoppy", { log: true });
 
 function trace(message: string, ...args: readonly unknown[]): void {
   logger.trace(`${message} ${args.join(" ")}`);

@@ -26,9 +26,9 @@ pnpm install
 3. Add your stack to the `enabledStacks` config option in [package.json](package.json)
 
 ```jsonc
-"jump2test.enabledStacks": {
+"hoppy.enabledStacks": {
   "type": "array",
-  "description": "Stacks to enable Jump2Test for",
+  "description": "Stacks to enable Hoppy for",
   "items": {
     "type": "string",
     "enum": [
@@ -54,7 +54,7 @@ Make sure to checkout to a feature branch from `main` and make your changes here
 
    ```bash
    pnpm package
-   # Produces ./jump2test-<version>.vsix
+   # Produces ./hoppy-<version>.vsix
    ```
 
 2. Launch for testing
@@ -68,4 +68,4 @@ Make sure to checkout to a feature branch from `main` and make your changes here
 
 ## Pull Requests
 
-Once you are satisfied that your feature works as expected, you can make a [pull request](https://github.com/darragh0/jump2test/pulls), and I'll review it as soon as possible!
+Once you are satisfied that your feature works as expected, you can make a [pull request](https://github.com/darragh0/hoppy/pulls), and I'll review it as soon as possible!

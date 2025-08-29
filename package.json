@@ -1,15 +1,15 @@
 {
-  "name": "jump2test",
-  "displayName": "Jump to Test",
+  "name": "hoppy",
+  "displayName": "Hoppy",
   "icon": "assets/logo.png",
-  "description": "Quickly find and jump to test files for a corresponding source file",
+  "description": "Hoppy quickly jumps from source file to its corresponding test file, and vice versa",
   "version": "1.0.0",
   "publisher": "darragh0",
   "license": "MIT",
-  "homepage": "https://github.com/darragh0/jump2test/blob/main/README.md",
+  "homepage": "https://github.com/darragh0/hoppy/blob/main/README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/darragh0/jump2test.git"
+    "url": "https://github.com/darragh0/hoppy.git"
   },
   "engines": {
     "vscode": "^1.75.0"
@@ -21,26 +21,26 @@
   "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
-      "title": "Jump to Test",
+      "title": "Hoppy",
       "properties": {
-        "jump2test.autoOpen": {
+        "hoppy.autoOpen": {
           "type": "boolean",
           "default": true,
           "description": "Automatically open test file when only one match is found"
         },
-        "jump2test.allowFallback": {
+        "hoppy.allowFallback": {
           "type": "boolean",
           "default": true,
           "description": "Allow fallback search if no test files are found"
         },
-        "jump2test.keepSourceOpen": {
+        "hoppy.keepSourceOpen": {
           "type": "boolean",
           "default": false,
           "description": "Keep source file open (prevent preview tab replacement) when opening test file"
         },
-        "jump2test.enabledStacks": {
+        "hoppy.enabledStacks": {
           "type": "array",
-          "description": "Stacks to enable Jump2Test for",
+          "description": "Stacks to enable Hoppy for",
           "items": {
             "type": "string",
             "enum": [
@@ -55,7 +55,7 @@
             "ruby"
           ]
         },
-        "jump2test.jumpToSourceBeta": {
+        "hoppy.jumpToSourceBeta": {
           "type": "boolean",
           "default": false,
           "description": "Enable jumping from test files to source files (Beta)"
@@ -64,13 +64,13 @@
     },
     "commands": [
       {
-        "command": "jump2test.findTests",
-        "title": "Jump to Test"
+        "command": "hoppy.findTests",
+        "title": "Hoppy: Jump to Test"
       }
     ],
     "keybindings": [
       {
-        "command": "jump2test.findTests",
+        "command": "hoppy.findTests",
         "key": "ctrl+t ctrl+t",
         "mac": "cmd+t cmd+t",
         "when": "editorTextFocus"
