@@ -1,4 +1,4 @@
-import { ErrMsg } from "./const";
+import { ErrMsg } from "@common/msg/const";
 
 type OkVariant<T> = { ok: true; value: T };
 type ErrVariant = { ok: false; error: ErrMsg | string };

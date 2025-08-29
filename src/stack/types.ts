@@ -1,3 +1,5 @@
+import { StackIdArr } from "@stack/registry/const";
+
 interface PackageJson {
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
@@ -5,10 +7,6 @@ interface PackageJson {
   [key: string]: unknown;
 }
 
-interface FwIndicatorMap {
-  deps: readonly string[];
-  devDeps: readonly string[];
-  files: readonly string[];
-}
+type StackId = (typeof StackIdArr)[number];
 
-export { FwIndicatorMap, PackageJson };
+export { PackageJson, StackId };

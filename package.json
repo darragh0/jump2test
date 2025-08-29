@@ -14,9 +14,7 @@
   "engines": {
     "vscode": "^1.75.0"
   },
-  "activationEvents": [
-    "onCommand:jump2test.findTests"
-  ],
+  "activationEvents": [],
   "categories": [
     "Other"
   ],
@@ -25,6 +23,18 @@
     "configuration": {
       "title": "Jump to Test",
       "properties": {
+        "jump2test.logLevel": {
+          "type": "string",
+          "default": "info",
+          "enum": [
+            "trace",
+            "debug",
+            "info",
+            "warn",
+            "error"
+          ],
+          "description": "Controls the verbosity of the extension's logs."
+        },
         "jump2test.autoOpen": {
           "type": "boolean",
           "default": true,
@@ -39,6 +49,23 @@
           "type": "boolean",
           "default": false,
           "description": "Keep source file open (prevent preview tab replacement) when opening test file"
+        },
+        "jump2test.enabledStacks": {
+          "type": "array",
+          "description": "Stacks to enable Jump2Test for",
+          "items": {
+            "type": "string",
+            "enum": [
+              "react",
+              "ember",
+              "ruby"
+            ]
+          },
+          "default": [
+            "react",
+            "ember",
+            "ruby"
+          ]
         }
       }
     },
@@ -58,16 +85,14 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
-    "compile": "npm run check-types && node esbuild.mjs",
-    "watch": "npm-run-all -p watch:*",
-    "watch:esbuild": "node esbuild.mjs --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "package": "npm run check-types && node esbuild.mjs --production",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "precompile": "pnpx tsx scripts/gen-registry.ts",
+    "compile": "pnpm run check-types && node esbuild.mjs",
+    "package": "pnpm run check-types && node esbuild.mjs --production && echo && pnpm vsce package --no-dependencies",
+    "publish": "pnpm run package && pnpm vsce publish --no-dependencies"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.19.123",
     "@types/prompts": "^2.4.9",
     "@types/vscode": "^1.74.0",
     "boxen": "^8.0.1",
@@ -79,7 +104,9 @@
     "ora": "^8.2.0",
     "prettier": "^3.6.2",
     "prompts": "^2.4.2",
-    "typescript": "^5.9.2",
-    "vsce": "^2.15.0"
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@vscode/vsce": "^3.6.0"
   }
 }

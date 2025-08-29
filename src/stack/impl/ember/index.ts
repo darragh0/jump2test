@@ -1,18 +1,16 @@
+import { ErrMsg } from "@common/msg/const";
+import { Err, Ok } from "@common/result";
+import { Result } from "@common/result/types";
+import { showInfo } from "@common/ui";
+import { EMBER_ALLOWED_EXTS } from "@impl/ember/const";
+import { Stack } from "@stack/interface";
 import path from "path";
-import { ErrMsg } from "../../common/const";
-import { Err, Ok } from "../../common/main";
-import { Result } from "../../common/types";
-import { showInfo } from "../../ui/user-msg";
-import { Framework } from "../interface";
 
-const EMBER_ALLOWED_EXTS = [".js", ".ts"];
-
-const ember: Framework = {
-  name: "Ember",
-  deps: ["ember-cli", "ember-source", "ember-data"],
-  devDeps: ["ember-cli", "ember-source", "ember-qunit", "ember-mocha"],
+const ember: Stack = {
+  id: "ember",
+  deps: ["ember-cli", "ember-source", "ember-data", "ember-qunit", "ember-mocha"],
   files: ["ember-cli-build.js", ".ember-cli"],
-  allowedExts: EMBER_ALLOWED_EXTS,
+  exts: EMBER_ALLOWED_EXTS,
 
   getGlob(fPath: string, rootDir: string): Result<string[]> {
     const endsWithTest = fPath.endsWith("-test.js") || fPath.endsWith("-test.ts");

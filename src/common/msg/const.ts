@@ -11,7 +11,7 @@ enum ErrMsg {
   UNSUPPORTED_FILE = "Unsupported file type",
 }
 
-/** Info messages (not an error) */
+/** Info messages (not error) */
 enum InfoMsg {
   NO_ACTIVE_EDITOR = "No active editor",
   NOT_IN_FILE = "You can only use this command in a file",

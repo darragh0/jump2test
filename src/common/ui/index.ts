@@ -1,5 +1,6 @@
+import { err, info } from "@common/logging";
+import { QuickPickFileItem, QuickPickOptions } from "@common/ui/types";
 import * as vscode from "vscode";
-import { QuickPickFileItem, QuickPickOptions } from "./types";
 
 async function openFile(path: string, keepSourceOpen?: boolean): Promise<void> {
   if (keepSourceOpen && vscode.window.activeTextEditor) {
@@ -38,4 +39,14 @@ async function showFilesQuickPick(
   return picked && "uri" in picked ? picked.uri : undefined;
 }
 
-export { openFile, showFilesQuickPick };
+function showErr(message: string): void {
+  err(`(UI-ERR) ${message}`);
+  vscode.window.showErrorMessage(message);
+}
+
+function showInfo(message: string): void {
+  info(`(UI-INF) ${message}`);
+  vscode.window.showInformationMessage(message);
+}
+
+export { openFile, showErr, showFilesQuickPick, showInfo };

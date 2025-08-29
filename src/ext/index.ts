@@ -1,14 +1,13 @@
 import fs from "fs";
 import * as vscode from "vscode";
 
-import { ErrMsg, InfoMsg } from "../common/const";
-import { debug } from "../common/logger";
-import { detectFramework, findNearestRoot } from "../env/main";
-import { QuickPickTitle } from "../ui/const";
-import { openFile, showFilesQuickPick } from "../ui/main";
-import { showErr, showInfo } from "../ui/user-msg";
-import { getUserConfig } from "./config/main";
-import { checkValidExt, findFiles, getTestQuery } from "./utils";
+import { debug } from "@common/logging";
+import { ErrMsg, InfoMsg } from "@common/msg/const";
+import { openFile, showErr, showFilesQuickPick, showInfo } from "@common/ui";
+import { QuickPickTitle } from "@common/ui/const";
+import { getConfigVal } from "@ext/config/main";
+import { checkValidExt, findFiles, getTestQuery } from "@ext/files";
+import { detectStack, findNearestRoot } from "@stack/detection";
 
 /** Entrypoint: find and open related test file(s) */
 async function main(): Promise<void> {
@@ -33,45 +32,53 @@ async function main(): Promise<void> {
     return;
   }
 
-  const fw = detectFramework(rootDir);
-  if (!fw) {
+  const stack = detectStack(rootDir);
+  if (!stack) {
     showErr(ErrMsg.UNSUPPORTED_FRAMEWORK);
     return;
   }
 
-  debug(`Detected framework: "${fw.name}"`);
+  debug(`Detected stack: "${stack.id}"`);
 
-  const checkExt = checkValidExt(curPath, fw);
+  const enabledStacks = getConfigVal("enabledStacks");
+  if (!enabledStacks.has(stack.id)) {
+    showErr(ErrMsg.UNSUPPORTED_FRAMEWORK);
+    return;
+  }
+
+  const checkExt = checkValidExt(curPath, stack);
   if (!checkExt.ok) {
     showErr(checkExt.error);
     return;
   }
 
-  const res = getTestQuery(curPath, fw, rootDir);
+  const res = getTestQuery(curPath, stack, rootDir);
   if (!res.ok) {
     showErr(res.error);
     return;
   }
 
-  let { isFallback, files } = await findFiles(res.value, curPath, true, fw);
+  let { isFallback, files } = await findFiles(res.value, curPath, true, stack);
   if (files.length === 0) {
     showInfo(InfoMsg.NO_TESTS);
     return;
   }
 
-  const conf = getUserConfig();
   const shouldOpen = !isFallback && files.length === 1;
 
-  if (shouldOpen && conf.autoOpen) {
-    await openFile(files[0].fsPath, conf.keepSourceOpen);
+  const autoOpen = getConfigVal("autoOpen");
+  const keepSourceOpen = getConfigVal("keepSourceOpen");
+
+  if (shouldOpen && autoOpen) {
+    await openFile(files[0].fsPath, keepSourceOpen);
     return;
-  } else if (!shouldOpen && !conf.autoOpen) {
+  } else if (!shouldOpen && !autoOpen) {
     debug(`Info: config.autoOpen is disabled; proceeding to selection`);
     showInfo(InfoMsg.NO_TESTS);
     return;
   }
 
-  if (!conf.allowFallback) {
+  if (!getConfigVal("allowFallback")) {
     debug(`Info: config.allowFallback is disabled; skipping fallback search`);
     showInfo(InfoMsg.NO_TESTS);
     return;
@@ -80,7 +87,7 @@ async function main(): Promise<void> {
   const title = isFallback ? QuickPickTitle.PossibleMatches : QuickPickTitle.MatchesFound;
   const selected = await showFilesQuickPick(files, { title });
 
-  if (selected) await openFile(selected.fsPath, conf.keepSourceOpen);
+  if (selected) await openFile(selected.fsPath, keepSourceOpen);
 }
 
 export { main };

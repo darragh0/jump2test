@@ -1,21 +1,18 @@
+import { Ok } from "@common/result";
+import { Result } from "@common/result/types";
+import { EXTS, REACT_ALLOWED_EXTS } from "@impl/react/const";
+import { Stack } from "@stack/interface";
 import path from "path";
-import { Ok } from "../../common/main";
-import { Result } from "../../common/types";
-import { Framework } from "../interface";
-
-const REACT_ALLOWED_EXTS = [".js", ".ts", ".jsx", ".tsx"];
-const EXTS = REACT_ALLOWED_EXTS.join(",");
 
 function mkGlob(glob: string, optTestSuffix: boolean = false): string {
   return `**/${glob}{.test,.spec${optTestSuffix ? "," : ""}}{${EXTS}}`;
 }
 
-const react: Framework = {
-  name: "React",
-  deps: ["react", "react-dom", "next", "gatsby", "@remix-run/react"],
-  devDeps: ["react", "react-dom", "@vitejs/plugin-react"],
+const react: Stack = {
+  id: "react",
+  deps: ["react", "react-dom", "next", "gatsby", "@remix-run/react", "@vitejs/plugin-react"],
   files: ["next.config.js", "next.config.mjs"],
-  allowedExts: REACT_ALLOWED_EXTS,
+  exts: REACT_ALLOWED_EXTS,
 
   getGlob(fPath: string, rootDir: string): Result<string[]> {
     const rel = path.relative(rootDir, fPath);

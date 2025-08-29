@@ -1,10 +1,8 @@
+import { Ok } from "@common/result";
+import { Result } from "@common/result/types";
+import { RUBY_ALLOWED_EXTS, TEST_REGEX } from "@impl/ruby/const";
+import { Stack } from "@stack/interface";
 import path from "path";
-import { Ok } from "../../common/main";
-import { Result } from "../../common/types";
-import { Framework } from "../interface";
-
-const RUBY_ALLOWED_EXTS = [".rb"];
-const TEST_REGEX = /_test$|_spec$|^test_|^spec_/;
 
 function isTestFile(name: string): boolean {
   return TEST_REGEX.test(name);
@@ -14,12 +12,11 @@ function stripTestPattern(name: string): string {
   return name.replace(TEST_REGEX, "");
 }
 
-const ruby: Framework = {
-  name: "Ruby",
-  deps: ["rails", "rspec", "minitest"],
-  devDeps: ["rspec", "rspec-rails", "minitest", "minitest-rails", "test-unit"],
+const ruby: Stack = {
+  id: "ruby",
+  deps: ["rails", "rspec", "minitest", "rspec-rails", "minitest-rails", "test-unit"],
   files: ["Gemfile", "Rakefile", ".rspec", "spec/spec_helper.rb", "test/test_helper.rb"],
-  allowedExts: RUBY_ALLOWED_EXTS,
+  exts: RUBY_ALLOWED_EXTS,
 
   getGlob(fPath: string, rootDir: string): Result<string[]> {
     const rel = path.relative(rootDir, fPath);
@@ -83,11 +80,13 @@ const ruby: Framework = {
         `${dir}/spec_${name}.rb`
       );
 
-      patterns.push(
-        `spec/${dir}/${name}_spec.rb`,
-        `test/${dir}/${name}_test.rb`,
-        `test/${dir}/test_${name}.rb`
-      );
+      if (!dir.startsWith("spec/") && !dir.startsWith("test/")) {
+        patterns.push(
+          `spec/${dir}/${name}_spec.rb`,
+          `test/${dir}/${name}_test.rb`,
+          `test/${dir}/test_${name}.rb`
+        );
+      }
 
       patterns.push(
         `spec/**/${name}_spec.rb`,

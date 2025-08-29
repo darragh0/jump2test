@@ -10,7 +10,14 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src",
+    "paths": {
+      "@common/*": ["common/*"],
+      "@ext/*": ["ext/*"],
+      "@stack/*": ["stack/*"],
+      "@impl/*": ["stack/impl/*"]
+    }
   },
   "exclude": ["node_modules", ".vscode-test"],
   "include": ["src/**/*", "src/extension.ts"]

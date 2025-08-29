@@ -29,7 +29,7 @@
 </div>
 <br />
 
-## Supported Frameworks
+## Supported Stacks
 
 - [React](https://react.dev/)
 - [Ember.js](https://emberjs.com/)
@@ -51,32 +51,13 @@ The following settings are provided. You can access them [here](vscode://setting
     // Allow fallback search if no test files are found
     "allowFallback": true,
     // Keep preview tab open when opening test file (prevent tab replacement)
-    "keepSourceOpen": false
+    "keepSourceOpen": false,
+    // Stacks to enable
+    "enabledStacks": ["react", "ember", "ruby"]
   }
 }
 ```
 
-## Development
-
-1. Ensure you have `npm` or `pnpm` installed
-
-2. To build the extension, run:
-
-   ```bash
-   pnpm install
-   pnpm run compile
-   ```
-
-3. Launch for testing
-   - Press `F5` to start an Extension Development Host
-
-4. Optionally install locally without publishing
-
-   ```bash
-   vsce package
-   # Produces ./jump2test-<version>.vsix
-   code --install-extension ./jump2test-*.vsix   # VS Code
-   cursor --install-extension ./jump2test-*.vsix # Cursor
-   ```
+## Acknowledgements
 
 [Seo and web icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/seo-and-web)
