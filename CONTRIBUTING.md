@@ -47,6 +47,9 @@ pnpm install
 
 ## Development
 
+If you would like to contribute to the project, you can do so by making a pull request.
+Make sure to checkout to a feature branch from `main` and make your changes here.
+
 1. To build the extension, run:
 
    ```bash
@@ -62,3 +65,7 @@ pnpm install
    ```bash
    chmod +x scripts/install.sh && scripts/install.sh [vscode|cursor]
    ```
+
+## Pull Requests
+
+Once you are satisfied that your feature works as expected, you can make a [pull request](https://github.com/darragh0/jump2test/pulls), and I'll review it as soon as possible!

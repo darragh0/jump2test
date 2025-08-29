@@ -43,7 +43,7 @@
 
 The following settings are provided. You can access them [here](vscode://settings/jump2test.)
 
-```json
+```jsonc
 {
   "jump2test": {
     // Automatically open test file when only one match is found
@@ -52,11 +52,23 @@ The following settings are provided. You can access them [here](vscode://setting
     "allowFallback": true,
     // Keep preview tab open when opening test file (prevent tab replacement)
     "keepSourceOpen": false,
+    // Enable jumping from test files to source files (Beta)
+    "jumpToSourceBeta": false,
     // Stacks to enable
-    "enabledStacks": ["react", "ember", "ruby"]
-  }
+    "enabledStacks": ["react", "ember", "ruby"],
+  },
 }
 ```
+
+## Bugs & Feature Requests
+
+If you encounter any bugs or have feature requests or general questions or feedback, please [open an issue](https://github.com/darragh0/jump2test/issues/new) with the `bug` or `feature-request` label.
+
+## Prospective Updates
+
+- [ ] Replace built-in VS Code search with quicker tool similar to `ripgrep`
+- [ ] Make editor agnostic (currently only supports VSCode)
+- [ ] Add support for more frameworks
 
 ## Acknowledgements
 
