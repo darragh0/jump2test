@@ -59,7 +59,7 @@ function detectStack(rootDir: string): Stack | null {
       const hasFiles = stack.files?.some((file: string) => fs.existsSync(path.join(rootDir, file)));
       const hasDeps = hasAny(deps, stack.deps) || hasAny(devDeps, stack.deps);
 
-      if (hasFiles && !hasDeps) return retStack(stack);
+      if (hasFiles || hasDeps) return retStack(stack);
     }
 
     if (stack.customDetect) {

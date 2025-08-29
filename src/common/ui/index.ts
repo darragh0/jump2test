@@ -40,12 +40,12 @@ async function showFilesQuickPick(
 }
 
 function showErr(message: string): void {
-  err(`(UI-ERR) ${message}`);
+  err(`UI-ERR: "${message}"`);
   vscode.window.showErrorMessage(message);
 }
 
 function showInfo(message: string): void {
-  info(`(UI-INF) ${message}`);
+  info(`UI-INF: "${message}"`);
   vscode.window.showInformationMessage(message);
 }
 

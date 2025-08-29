@@ -23,18 +23,6 @@
     "configuration": {
       "title": "Jump to Test",
       "properties": {
-        "jump2test.logLevel": {
-          "type": "string",
-          "default": "info",
-          "enum": [
-            "trace",
-            "debug",
-            "info",
-            "warn",
-            "error"
-          ],
-          "description": "Controls the verbosity of the extension's logs."
-        },
         "jump2test.autoOpen": {
           "type": "boolean",
           "default": true,
